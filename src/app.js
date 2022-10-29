@@ -31,4 +31,17 @@ app.post('/teams', (req, res) => {
   res.status(201).json({ message: 'Criado com sucesso' });
 });
 
+app.put('/teams/:id', (req, res) => {
+  const paramsId = req.params.id;
+  const { name, initials } = req.body;
+
+  const updateTeam = teams.find((team) => team.id === Number(paramsId));
+
+  if (!updateTeam) return res.status(404).json({ message: 'Team not found!' });
+
+  updateTeam.name = name;
+  updateTeam.initials = initials;
+  res.status(200).json({ updateTeam });
+});
+
 module.exports = app;
