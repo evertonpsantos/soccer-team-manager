@@ -2,6 +2,8 @@ const express = require('express');
 
 const app = express();
 
+app.use(express.json());
+
 const teams = [
   {
     id: 1,
@@ -21,6 +23,12 @@ app.get('/', (req, res) => {
 
 app.get('/teams', (req, res) => {
   res.status(200).json(teams);
+});
+
+app.post('/teams', (req, res) => {
+  const newTeam = { ...req.body };
+  teams.push(newTeam);
+  res.status(201).json({ message: 'Criado com sucesso' });
 });
 
 module.exports = app;
