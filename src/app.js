@@ -44,4 +44,11 @@ app.put('/teams/:id', (req, res) => {
   res.status(200).json({ updateTeam });
 });
 
+app.delete('/teams/:id', (req, res) => {
+  const idParams = req.params.id;
+  const positionInArray = teams.findIndex((team) => team.id === Number(idParams));
+  teams.splice(positionInArray, 1);
+  res.status(200).end();
+});
+
 module.exports = app;
