@@ -25,6 +25,12 @@ app.get('/teams', (req, res) => {
   res.status(200).json(teams);
 });
 
+app.get('/teams/:id', (req, res) => {
+  const idParams = req.params.id;
+  const foundTeam = teams.find((team) => team.id === Number(idParams));
+  res.status(200).json(foundTeam);
+});
+
 app.post('/teams', (req, res) => {
   const newTeam = { ...req.body };
   teams.push(newTeam);
